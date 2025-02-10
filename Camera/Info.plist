@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please allow microphone usage for video recordings</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please grand access to save content in photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow camera usage to continue</string>
+</dict>
+</plist>
