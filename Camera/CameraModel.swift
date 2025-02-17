@@ -118,22 +118,6 @@ final class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelega
         }
     }
     
-//    func startRecording() {
-//        
-//        guard !videoOutput.connections.isEmpty else {
-//            print("No active connections for video output")
-//            return
-//        }
-//
-//        guard !videoOutput.isRecording else { return }
-//        
-//        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).mov")
-//        videoOutput.startRecording(to: url, recordingDelegate: self)
-//        
-//        DispatchQueue.main.async {
-//            self.isRecording = true
-//        }
-//    }
     func startRecording() {
         guard !videoOutput.isRecording else { return }
         
