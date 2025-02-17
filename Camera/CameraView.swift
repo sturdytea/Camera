@@ -13,6 +13,7 @@ import SwiftUI
 
 struct CameraView: View {
     @StateObject var camera = CameraModel()
+    @State var isPhotoMode = true
     
     var body: some View {
         ZStack {
@@ -37,11 +38,12 @@ struct CameraView: View {
                 }
                 
                 Spacer()
-                
+                // Bottom bar
                 HStack {
+                    // After recording
                     if camera.isTaken {
                         Button {
-                            if !camera.isSaved {
+                            if !camera.isSaved && isPhotoMode {
                                 camera.savePhoto()
                             }
                         } label: {
@@ -56,19 +58,35 @@ struct CameraView: View {
                         .padding(.leading)
                         
                         Spacer()
-                    } else {
+                    }
+                    // Before recording
+                    else {
+                        CustomToggle(isPhotoMode: $isPhotoMode)
+                        Spacer()
+                        
                         Button {
-                            camera.takePhoto()
+                            if isPhotoMode {
+                                camera.takePhoto()
+                            } else {
+                                camera.isRecording ? camera.stopRecording() : camera.startRecording()
+                            }
                         } label: {
                             ZStack {
                                 Circle()
-                                    .fill(Color.white)
+                                    .fill(isPhotoMode ? .white : .red)
                                     .frame(width: 65, height: 65)
+                                    .opacity(camera.isRecording ? 0.5 : 1)
+                                    .animation(.easeOut(duration: 0.3), value: camera.isRecording)
                                 Circle()
-                                    .stroke(Color.white, lineWidth: 2)
+                                    .stroke(isPhotoMode ? .white : .red, lineWidth: 2)
                                     .frame(width: 75, height: 75)
+                                    .opacity(camera.isRecording ? 0.5 : 1)
+                                    .animation(.easeOut(duration: 0.3), value: camera.isRecording)
                             }
                         }
+                        
+                        Spacer()
+                        Spacer()
                     }
                 }
                 .frame(height: 75)
