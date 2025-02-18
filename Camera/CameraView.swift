@@ -61,7 +61,12 @@ struct CameraView: View {
                     }
                     // Before recording
                     else {
-                        CustomToggle(isPhotoMode: $isPhotoMode)
+                        if camera.isRecording {
+                            Spacer()
+                        } else {
+                            CustomToggle(isPhotoMode: $isPhotoMode)
+                        }
+                        
                         Spacer()
                         
                         Button {
@@ -86,7 +91,20 @@ struct CameraView: View {
                         }
                         
                         Spacer()
-                        Spacer()
+                        
+                        if camera.isRecording {
+                            Spacer()
+                        } else {
+                            Button(action: {
+                                camera.switchCamera()
+                            }) {
+                                Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                    .font(.title)
+                                    .foregroundStyle(.cyan)
+                                    .padding()
+                                    .clipShape(Circle())
+                            }
+                        }
                     }
                 }
                 .frame(height: 75)

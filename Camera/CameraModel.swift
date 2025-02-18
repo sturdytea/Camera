@@ -15,6 +15,7 @@ import SwiftUI
 final class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
     @Published var isTaken = false
     @Published var alert = false
+    var currentPosition: AVCaptureDevice.Position = .back
     
     var session: AVCaptureSession = {
         var session = AVCaptureSession()
@@ -104,6 +105,34 @@ final class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelega
             catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+        
+    func switchCamera() {
+        DispatchQueue.global(qos: .background).async {
+            self.session.beginConfiguration()
+            
+            if let currentInput = self.session.inputs.first as? AVCaptureDeviceInput {
+                self.session.removeInput(currentInput)
+            }
+            
+            self.currentPosition = (self.currentPosition == .back) ? .front : .back
+            
+            guard let newDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: self.currentPosition) else {
+                print("! No available camera found")
+                return
+            }
+            
+            do {
+                let newInput = try AVCaptureDeviceInput(device: newDevice)
+                if self.session.canAddInput(newInput) {
+                    self.session.addInput(newInput)
+                }
+            } catch {
+                print("Error switching camera: \(error.localizedDescription)")
+            }
+            
+            self.session.commitConfiguration()
         }
     }
 
