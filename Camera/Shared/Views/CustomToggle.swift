@@ -15,7 +15,6 @@ struct CustomToggle: View {
     
     @State var selection: Selection = .photo
     @Binding var isPhotoMode: Bool
-    
     let background: Color = .black70
     let switchBackground: Color = .white
     
@@ -42,7 +41,6 @@ struct CustomToggle: View {
                     .onTapGesture {
                         self.isPhotoMode.toggle()
                     }
-                
                 Image(systemName: isPhotoMode ? "camera.fill" : "video.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

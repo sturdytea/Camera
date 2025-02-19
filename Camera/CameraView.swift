@@ -29,7 +29,6 @@ struct CameraView: View {
                                    action: { camera.retakePhoto() })
                         Spacer()
                     }
-                    
                     // While recording
                     if camera.isRecording {
                         // TODO: Add timer
