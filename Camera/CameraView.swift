@@ -14,20 +14,56 @@ import SwiftUI
 struct CameraView: View {
     @StateObject var camera = CameraModel()
     @State var isPhotoMode = true
+    @AppStorage("Grid") var isGridOn = false
     
     var body: some View {
         ZStack {
             CameraPreview(camera: camera)
                 .ignoresSafeArea(.all, edges: .all)
+            // Grid
+            if isGridOn {
+                Group {
+                    HStack {
+                        Spacer()
+                        ForEach(0..<2, id: \.self) { _ in
+                            Divider()
+                                .background(.white)
+                            Spacer()
+                        }
+                    }
+                    VStack {
+                        Spacer()
+                        ForEach(0..<2, id: \.self) { _ in
+                            Divider()
+                                .background(.white)
+                            Spacer()
+                        }
+                    }
+                }
+                .opacity(0.7)
+            }
             VStack {
                 // MARK: - Top bar
                 HStack {
                     // After recording
                     if camera.isTaken {
                         ToolButton(icon: "arrow.backward",
-                                   isRedacting: camera.isTaken,
+                                   isActive: camera.isTaken,
                                    action: { camera.retakePhoto() })
                         Spacer()
+                    }
+                    // Before recording
+                    else {
+                        Spacer()
+                        if !camera.isRecording {
+                            HStack(alignment: .top) {
+                                ToolButton(icon: "grid",
+                                           isActive: isGridOn,
+                                           action: {
+                                    isGridOn.toggle()
+                                })
+                            }
+                        }
                     }
                     // While recording
                     if camera.isRecording {
