@@ -2,6 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>AppBackgoundColor</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<true/>
+		<key>UIImageName</key>
+		<string>AppLogo</string>
+	</dict>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Please allow microphone usage for video recordings</string>
 	<key>NSPhotoLibraryUsageDescription</key>
