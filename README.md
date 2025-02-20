@@ -25,6 +25,13 @@ cd Camera
 open Camera.xcodeproj
 ```
 
+## Screenshots
+<div align="row">
+  <img src="https://github.com/user-attachments/assets/96e1cba8-125f-45ec-8538-01e152657ca0" style="width: 20%">
+  <img src="https://github.com/user-attachments/assets/569c83fd-0d37-4f08-9142-aae3501f5e0c" style="width: 20%">
+  <img src="https://github.com/user-attachments/assets/ce0cdc76-645e-4cb7-b03a-099ccce27fbf" style="width: 20%">
+</div>
+
 ## Future Enhancements 
 - [ ] __Arm Gestures Recognition__: Recognizes arm gestures.
 - [ ] __Face Filters__: Connection with Camera Kit (by [Snap for Developers](https://developers.snap.com/camera-kit/home)).
